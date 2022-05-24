@@ -373,7 +373,7 @@ func (bs *BufferList) AddLine(netID, title string, notify NotifyType, line Line)
 		line.Body = line.Body.ParseURLs()
 	}
 
-	if notify != NotifyNone && b != current && !b.unread {
+	if notify != NotifyNone && !line.Mergeable && b != current && !b.unread {
 		b.lines = append(b.lines, Line{
 			At:   time.Now(),
 			Body: Styled("---", tcell.StyleDefault.Foreground(tcell.ColorRed)),

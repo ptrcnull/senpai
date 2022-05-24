@@ -909,7 +909,7 @@ func (app *App) handleIRCEvent(netID string, ev interface{}) {
 			if unreadMarker, ok := app.unreads[netID+" "+ev.Target]; ok {
 				wasUnread = line.At.After(unreadMarker)
 			}
-			if (line.At.After(app.lastCloseTime) || wasUnread) && !setUnread {
+			if (line.At.After(app.lastCloseTime) || wasUnread) && !line.Mergeable && !setUnread {
 				setUnread = true
 				linesBefore = append(linesBefore, ui.Line{
 					At:   line.At,
